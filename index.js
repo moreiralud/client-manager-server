@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
-const name = 'Ludmila';
+const clientRouter = require('./routes/client');
+
 
 app.use(bodyParser.json());
 app.use(
@@ -15,9 +16,7 @@ app.get('/', (req, res) => {
   res.json({'message': 'ok'});
 })
 
-app.get('/welcome', (req, res) => {
-    res.json({'message': `thanks, ${name}`});
-  })
+app.use('/v1/clients', clientRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
